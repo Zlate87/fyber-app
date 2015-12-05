@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">Fyber App</string>
+	<string name="app_name">Fyber App</string>
+	<string name="uid">uid</string>
+	<string name="apiKey">API Key</string>
+	<string name="appid">appid</string>
+	<string name="pub0">pub0</string>
+	<string name="viewOffers">View Offers</string>
+	<string name="form_instructions">Please fill in the form fields</string>
+	<string name="title_activity_offers">OffersActivity</string>
 </resources>
