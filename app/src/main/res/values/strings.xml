@@ -6,5 +6,10 @@
 	<string name="pub0">pub0</string>
 	<string name="viewOffers">View Offers</string>
 	<string name="form_instructions">Please fill in the form fields</string>
-	<string name="title_activity_offers">OffersActivity</string>
+	<string name="title_activity_offers">Offers</string>
+	<string name="problemWhileLoadingDataFromServer">There was a problem while loading data from the server. Please check the input data and try again.</string>
+	<string name="insertSampleData">Insert Sample Data</string>
+	<string name="offerImage">Offer Image</string>
+	<string name="payout">Payout: %1$s</string>
+	<string name="progresss_message">Loading…</string>
 </resources>

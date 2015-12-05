@@ -8,7 +8,6 @@ public class Offer {
 	private String title;
 	private String teaser;
 	private String thumbnail;
-	private String hires;
 	private String payout;
 
 	public String getTitle() {
@@ -33,14 +32,6 @@ public class Offer {
 
 	public void setThumbnail(String thumbnail) {
 		this.thumbnail = thumbnail;
-	}
-
-	public String getHires() {
-		return hires;
-	}
-
-	public void setHires(String hires) {
-		this.hires = hires;
 	}
 
 	public String getPayout() {

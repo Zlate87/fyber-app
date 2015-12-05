@@ -1,5 +1,7 @@
 package com.zlate87.fyberapp.feature.offers.service;
 
+import android.util.Log;
+
 import com.google.common.hash.HashCode;
 import com.google.common.hash.Hashing;
 import com.koushikdutta.ion.Response;
@@ -10,6 +12,8 @@ import java.nio.charset.Charset;
  * Class responsible for the signature validation.
  */
 public class OffersSignatureService {
+
+	private static final String LOG_TAG = OffersSignatureService.class.getSimpleName();
 
 	private static final String SIGNATURE_HEADER_KEY = "X-Sponsorpay-Response-Signature";
 
@@ -26,7 +30,10 @@ public class OffersSignatureService {
 		String hashSource = responseBody + apiKey;
 		HashCode hashCode = Hashing.sha1().hashString(hashSource, Charset.defaultCharset());
 		String hash = hashCode.toString();
-		return signature.equals(hash);
+		boolean isValid = hash.equals(signature);
+		Log.d(LOG_TAG, String.format("isResponseSignatureValid for responseBody [%s], apiKey [%s] and  signature [%s] " +
+						"resulted with [%s]", responseBody, apiKey, signature, isValid));
+		return isValid;
 	}
 
 }

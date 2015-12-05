@@ -44,6 +44,11 @@
 				android:inputType="text" />
 
 		<Button
+				android:id="@+id/insertSampleData"
+				style="@style/FormButton"
+				android:text="@string/insertSampleData" />
+
+		<Button
 				android:id="@+id/viewOffers"
 				style="@style/FormButton"
 				android:text="@string/viewOffers" />

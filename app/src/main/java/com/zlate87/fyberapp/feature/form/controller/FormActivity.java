@@ -1,5 +1,6 @@
 package com.zlate87.fyberapp.feature.form.controller;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
@@ -26,6 +27,9 @@ public class FormActivity extends FyberBaseActivity {
 	private View.OnClickListener viewOffersOnClickListener = new View.OnClickListener() {
 		@Override
 		public void onClick(View v) {
+
+			// TODO add validation for mandatory fileds
+
 			String uid = uidEditText.getText().toString();
 			String apiKey = apiKeyEditText.getText().toString();
 			String appid = appidEditText.getText().toString();
@@ -43,6 +47,17 @@ public class FormActivity extends FyberBaseActivity {
 		}
 	};
 
+	private View.OnClickListener insertSampleDataOnClickListener = new View.OnClickListener() {
+		@SuppressLint("SetTextI18n")
+		@Override
+		public void onClick(View v) {
+			uidEditText.setText("spiderman");
+			apiKeyEditText.setText("1c915e3b5d42d05136185030892fbb846c278927");
+			appidEditText.setText("2070");
+			pub0EditText.setText("test");
+		}
+	};
+
 	@Override
 	protected int getLayoutResId() {
 		return R.layout.form_activity;
@@ -56,5 +71,6 @@ public class FormActivity extends FyberBaseActivity {
 		pub0EditText = (EditText) findViewById(R.id.pub0);
 
 		findViewById(R.id.viewOffers).setOnClickListener(viewOffersOnClickListener);
+		findViewById(R.id.insertSampleData).setOnClickListener(insertSampleDataOnClickListener);
 	}
 }

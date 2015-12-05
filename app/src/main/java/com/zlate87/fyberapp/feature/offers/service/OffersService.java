@@ -1,11 +1,12 @@
 package com.zlate87.fyberapp.feature.offers.service;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Response;
 import com.zlate87.fyberapp.base.HttpStack;
-import com.zlate87.fyberapp.feature.offers.callback.JsonObjectWithResponseCallback;
+import com.zlate87.fyberapp.feature.offers.callback.HttpStackOffersResponseCallback;
 import com.zlate87.fyberapp.feature.offers.exception.SignatureNotValidException;
 import com.zlate87.fyberapp.feature.offers.model.Offer;
 import com.zlate87.fyberapp.feature.offers.model.OfferParameters;
@@ -17,6 +18,8 @@ import java.util.List;
  */
 // TODO add JUnit tests
 public class OffersService {
+
+	private static final String LOG_TAG = OffersService.class.getSimpleName();
 
 	private HttpStack httpStack;
 
@@ -31,13 +34,29 @@ public class OffersService {
 	 * @param futureCallback  a callback that will get the list of offers if properly received from the server
 	 */
 	public void getOffersForParameters(OfferParameters offerParameters, FutureCallback<List<Offer>> futureCallback) {
+		Log.d(LOG_TAG, String.format("getOffersForParameters called with parameters: apiKey=[%s], appid=[%s], " +
+										"format=[%s], googleAddId=[%s], googleAdIdLimitTrackingEnabled=[%s], ip=[%s], locale=[%s], " +
+										"osVersion=[%s], pub0=[%s], timeStamp=[%s], uid=[%s], ip=[%s]",
+						offerParameters.getApiKey(),
+						offerParameters.getAppid(),
+						offerParameters.getFormat(),
+						offerParameters.getGoogleAddId(),
+						offerParameters.getGoogleAdIdLimitedTrackingEnabled(),
+						offerParameters.getIp(),
+						offerParameters.getLocale(),
+						offerParameters.getOsVersion(),
+						offerParameters.getPub0(),
+						offerParameters.getTimestamp(),
+						offerParameters.getUid(),
+						offerParameters.getIp()));
+
 		// prepare the url
 		OffersUrlService offersUrlService = new OffersUrlService();
 		String offersServiceUrl = offersUrlService.getOffersServiceUrl(offerParameters);
 
 		// send the request to the backend, once the request is it will be precessed by the callback
 		String apiKey = offerParameters.getApiKey();
-		JsonObjectWithResponseCallback callback = new JsonObjectWithResponseCallback(futureCallback, apiKey);
+		HttpStackOffersResponseCallback callback = new HttpStackOffersResponseCallback(futureCallback, apiKey);
 		httpStack.getStringObjectWithResponse(offersServiceUrl, callback);
 	}
 
@@ -54,6 +73,7 @@ public class OffersService {
 																	 FutureCallback<List<Offer>> futureCallback, String apiKey) {
 		// check if there is an exception
 		if (exception != null) {
+			Log.d(LOG_TAG, String.format("handleOffersResponse called with exception of type [%s]", exception.getClass()));
 			futureCallback.onCompleted(exception, null);
 			return;
 		}
@@ -62,6 +82,7 @@ public class OffersService {
 		OffersSignatureService offersSignatureService = new OffersSignatureService();
 		boolean signatureValid = offersSignatureService.isResponseSignatureValid(result, apiKey);
 		if (!signatureValid) {
+			Log.d(LOG_TAG, "handleOffersResponse called but the signature was invalid");
 			SignatureNotValidException signatureNotValidException = new SignatureNotValidException();
 			futureCallback.onCompleted(signatureNotValidException, null);
 			return;
@@ -70,6 +91,7 @@ public class OffersService {
 		// get the offers from the response and send them to the callback
 		OffersJsonService offersJsonService = new OffersJsonService();
 		String body = result.getResult();
+		Log.d(LOG_TAG, String.format("handleOffersResponse called with valid signature and body [%s]", body));
 		List<Offer> offers = offersJsonService.convertJsonToObjects(body);
 		futureCallback.onCompleted(null, offers);
 	}

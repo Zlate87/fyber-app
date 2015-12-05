@@ -1,5 +1,7 @@
 package com.zlate87.fyberapp.feature.offers.service;
 
+import android.util.Log;
+
 import com.google.common.hash.HashCode;
 import com.google.common.hash.Hashing;
 import com.zlate87.fyberapp.feature.offers.model.OfferParameters;
@@ -12,6 +14,8 @@ import java.util.TreeMap;
  * Class responsible for preparing the URL for the call to the backend.
  */
 public class OffersUrlService {
+
+	private static final String LOG_TAG = OffersUrlService.class.getSimpleName();
 
 	private static final String BASE_URL = "http://api.fyber.com/feed/v1/offers.json?";
 
@@ -35,21 +39,19 @@ public class OffersUrlService {
 		parameters.put("ip", offerParameters.getIp());
 		parameters.put("pub0", offerParameters.getPub0());
 
-		String hashKey = generateHashKey(parameters, offerParameters.getApiKey());
-		parameters.put("hashKey", hashKey);
-
 		StringBuilder stringBuilder = addParametersToStringBuilder(parameters);
+		String hashKey = generateHashKey(stringBuilder, offerParameters.getApiKey());
 
-		String url = BASE_URL + stringBuilder.toString();
+
+		String url = BASE_URL + stringBuilder.toString() + "hashkey=" + hashKey;
+		Log.d(LOG_TAG, String.format("getOffersServiceUrl resulted with URL [%s]", url));
 		return url;
 	}
 
-	private String generateHashKey(Map<String, String> parameters, String apiKey) {
-		StringBuilder hashSourceBuilder = addParametersToStringBuilder(parameters);
-		hashSourceBuilder.append(apiKey);
-
-		String hashSource = hashSourceBuilder.toString();
+	private String generateHashKey(StringBuilder hashSourceBuilder, String apiKey) {
+		String hashSource = hashSourceBuilder.toString() + apiKey;
 		HashCode hashCode = Hashing.sha1().hashString(hashSource, Charset.defaultCharset());
+		Log.d(LOG_TAG, String.format("creating sha1 from [%s] resulted with hash [%s]", hashSource, hashCode));
 		return hashCode.toString();
 	}
 
