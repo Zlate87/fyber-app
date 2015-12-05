@@ -11,5 +11,5 @@
 	<string name="insertSampleData">Insert Sample Data</string>
 	<string name="offerImage">Offer Image</string>
 	<string name="payout">Payout: %1$s</string>
-	<string name="progresss_message">Loading…</string>
+	<string name="progress_message">Loading…</string>
 </resources>

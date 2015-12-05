@@ -79,7 +79,7 @@ public class OffersActivity extends FyberBaseActivity {
 	}
 
 	private void getOffers() {
-		String message = getString(R.string.progresss_message);
+		String message = getString(R.string.progress_message);
 		progress = new ProgressDialog(this);
 		progress.setMessage(message);
 		progress.show();
