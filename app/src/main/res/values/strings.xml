@@ -12,4 +12,5 @@
 	<string name="offerImage">Offer Image</string>
 	<string name="payout">Payout: %1$s</string>
 	<string name="progress_message">Loading…</string>
+	<string name="noOffers">No offers</string>
 </resources>

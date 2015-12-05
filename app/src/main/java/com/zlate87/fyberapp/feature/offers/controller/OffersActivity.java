@@ -7,6 +7,8 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.ads.identifier.AdvertisingIdClient;
@@ -42,6 +44,7 @@ public class OffersActivity extends FyberBaseActivity {
 	private OffersService offerService = new OffersService(this);
 
 	private RecyclerView offersRecyclerView;
+	private TextView noOffersTextView;
 
 	private ProgressDialog progress;
 
@@ -50,14 +53,17 @@ public class OffersActivity extends FyberBaseActivity {
 		@Override
 		public void onCompleted(Exception exception, List<Offer> offers) {
 			progress.hide();
-			if (exception != null) {
 
+			boolean availableOffers = exception == null && offers != null && !offers.isEmpty();
+			offersRecyclerView.setVisibility(availableOffers ? View.VISIBLE: View.GONE);
+			noOffersTextView.setVisibility(availableOffers ?  View.GONE : View.VISIBLE);
+
+			if (exception != null) {
 				Log.d(LOG_TAG, String.format("handleOffersResponse called with exception of type [%s]", exception.getClass()));
 				Toast.makeText(OffersActivity.this, R.string.problemWhileLoadingDataFromServer, Toast.LENGTH_LONG).show();
 				return;
 			}
 
-			// TODO if offers is empty show no offers message
 			OffersAdapter offersAdapter = new OffersAdapter(offers, OffersActivity.this);
 			offersRecyclerView.setAdapter(offersAdapter);
 		}
@@ -103,6 +109,7 @@ public class OffersActivity extends FyberBaseActivity {
 	@Override
 	protected void setupViews() {
 		offersRecyclerView = (RecyclerView) findViewById(R.id.offersRecyclerView);
+		noOffersTextView = (TextView) findViewById(R.id.noOffersTextView);
 	}
 
 	public class getOffersAsync extends AsyncTask<Void, Void, OfferParameters> {
