@@ -16,15 +16,20 @@ import java.util.List;
 /**
  * Service class responsible for providing the needed offer services.
  */
-// TODO add JUnit tests
 public class OffersService {
 
 	private static final String LOG_TAG = OffersService.class.getSimpleName();
 
 	private HttpStack httpStack;
+	private OffersUrlService offersUrlService;
+	private OffersJsonService offersJsonService;
+	private OffersSignatureService offersSignatureService;
 
 	public OffersService(Context context) {
 		httpStack = new HttpStack(context);
+		offersUrlService = new OffersUrlService();
+		offersJsonService = new OffersJsonService();
+		offersSignatureService = new OffersSignatureService();
 	}
 
 	/**
@@ -51,12 +56,11 @@ public class OffersService {
 						offerParameters.getIp()));
 
 		// prepare the url
-		OffersUrlService offersUrlService = new OffersUrlService();
 		String offersServiceUrl = offersUrlService.getOffersServiceUrl(offerParameters);
 
 		// send the request to the backend, once the request is it will be precessed by the callback
 		String apiKey = offerParameters.getApiKey();
-		HttpStackOffersResponseCallback callback = new HttpStackOffersResponseCallback(futureCallback, apiKey);
+		HttpStackOffersResponseCallback callback = new HttpStackOffersResponseCallback(this, futureCallback, apiKey);
 		httpStack.getStringObjectWithResponse(offersServiceUrl, callback);
 	}
 
@@ -79,20 +83,18 @@ public class OffersService {
 		}
 
 		// check if the signature is valid
-		OffersSignatureService offersSignatureService = new OffersSignatureService();
 		boolean signatureValid = offersSignatureService.isResponseSignatureValid(result, apiKey);
+		String body = result.getResult();
 		if (!signatureValid) {
 			Log.d(LOG_TAG, "handleOffersResponse called but the signature was invalid");
-			SignatureNotValidException signatureNotValidException = new SignatureNotValidException();
+			SignatureNotValidException signatureNotValidException = new SignatureNotValidException(body, apiKey);
 			futureCallback.onCompleted(signatureNotValidException, null);
 			return;
 		}
 
 		// get the offers from the response and send them to the callback
-		OffersJsonService offersJsonService = new OffersJsonService();
-		String body = result.getResult();
 		Log.d(LOG_TAG, String.format("handleOffersResponse called with valid signature and body [%s]", body));
-		List<Offer> offers = offersJsonService.convertJsonToObjects(body);
+		List<Offer> offers = offersJsonService.convertJsonToOffers(body);
 		futureCallback.onCompleted(null, offers);
 	}
 }

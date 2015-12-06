@@ -1,0 +1,16 @@
+{
+  "code": "OK",
+  "message": "Ok",
+  "count": 30,
+  "pages": 8,
+  "information": {
+    "app_name": "VC Backend Test",
+    "appid": 2070,
+    "virtual_currency": "VCS Coins",
+    "virtual_currency_sale_enabled": false,
+    "country": "DE",
+    "language": "DE",
+    "support_url": "http://offer.fyber.com/mobile/support?appid=2070&client=api&uid=spiderman"
+  },
+  "offers": []
+}

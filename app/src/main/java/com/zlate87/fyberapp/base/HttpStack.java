@@ -21,7 +21,6 @@ public class HttpStack {
 
 	public void getStringObjectWithResponse(String url, FutureCallback<Response<String>> callback) {
 		Log.d(LOG_TAG, String.format("getStringObjectWithResponse called with URL [%s]", url));
-		// TODO enable keep-alive and gzip
 		Ion.with(context).load(url).asString().withResponse().setCallback(callback);
 	}
 }

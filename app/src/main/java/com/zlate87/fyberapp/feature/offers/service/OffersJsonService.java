@@ -14,12 +14,19 @@ import java.util.List;
  */
 public class OffersJsonService {
 
-	public List<Offer> convertJsonToObjects(String jsonString) {
+	/**
+	 * Converts valid json offers string into a list of offers.
+	 *
+	 * @param jsonString the offers json
+	 * @return the list of offers
+	 * @throws RuntimeException if the jsonString is not valid
+	 */
+	public List<Offer> convertJsonToOffers(String jsonString) {
 		try {
 			JSONObject jsonObject = new JSONObject(jsonString);
 			JSONArray offersJsonArray = jsonObject.getJSONArray("offers");
 			List<Offer> offers = new ArrayList<>();
-			for (int i = 1; i < offersJsonArray.length(); i++) {
+			for (int i = 0; i < offersJsonArray.length(); i++) {
 				JSONObject offerJsonObject = offersJsonArray.getJSONObject(i);
 				Offer offer = new Offer();
 				offer.setTitle(offerJsonObject.optString("title"));

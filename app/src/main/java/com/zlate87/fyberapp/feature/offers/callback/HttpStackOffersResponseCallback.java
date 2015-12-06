@@ -14,15 +14,17 @@ public class HttpStackOffersResponseCallback implements FutureCallback<Response<
 
 	private final String apiKey;
 	private FutureCallback<List<Offer>> futureCallback;
+	private OffersService offersService;
 
-	public HttpStackOffersResponseCallback(FutureCallback<List<Offer>> futureCallback, String apiKey) {
+	public HttpStackOffersResponseCallback(OffersService offersService, FutureCallback<List<Offer>> futureCallback,
+																				 String apiKey) {
+		this.offersService = offersService;
 		this.futureCallback = futureCallback;
 		this.apiKey = apiKey;
 	}
 
 	@Override
-	public void onCompleted(Exception e, Response<String> result) {
-		OffersService offersService = new OffersService(null);
-		offersService.handleOffersResponse(e, result, futureCallback, apiKey);
+	public void onCompleted(Exception exception, Response<String> result) {
+		offersService.handleOffersResponse(exception, result, futureCallback, apiKey);
 	}
 }

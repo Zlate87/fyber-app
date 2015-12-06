@@ -27,9 +27,6 @@ public class FormActivity extends FyberBaseActivity {
 	private View.OnClickListener viewOffersOnClickListener = new View.OnClickListener() {
 		@Override
 		public void onClick(View v) {
-
-			// TODO add validation for mandatory fileds
-
 			String uid = uidEditText.getText().toString();
 			String apiKey = apiKeyEditText.getText().toString();
 			String appid = appidEditText.getText().toString();
