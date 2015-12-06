@@ -27,7 +27,6 @@ import java.util.List;
 /**
  * Activity that is responsible for showing offers for the parameters it receives via intent extras.
  */
-// TODO add functional test for the activity
 public class OffersActivity extends FyberBaseActivity {
 
 	private static final String LOG_TAG = OffersActivity.class.getSimpleName();
@@ -117,10 +116,12 @@ public class OffersActivity extends FyberBaseActivity {
 		@Override
 		protected OfferParameters doInBackground(Void... params) {
 			OfferParameters offerParameters = new OfferParameters();
-			offerParameters.setUid(getIntent().getExtras().getString(UID_INTENT_EXTRA_KEY));
-			offerParameters.setAppid(getIntent().getExtras().getString(APPID_INTENT_EXTRA_KEY));
-			offerParameters.setApiKey(getIntent().getExtras().getString(API_KEY_INTENT_EXTRA_KEY));
-			offerParameters.setPub0(getIntent().getExtras().getString(PUB0_INTENT_EXTRA_KEY));
+			if (getIntent().getExtras() != null) {
+				offerParameters.setUid(getIntent().getExtras().getString(UID_INTENT_EXTRA_KEY));
+				offerParameters.setAppid(getIntent().getExtras().getString(APPID_INTENT_EXTRA_KEY));
+				offerParameters.setApiKey(getIntent().getExtras().getString(API_KEY_INTENT_EXTRA_KEY));
+				offerParameters.setPub0(getIntent().getExtras().getString(PUB0_INTENT_EXTRA_KEY));
+			}
 			offerParameters.setFormat("json");
 			offerParameters.setLocale("de");
 			offerParameters.setOsVersion(android.os.Build.VERSION.RELEASE);

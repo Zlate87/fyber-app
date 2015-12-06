@@ -13,8 +13,6 @@ import com.zlate87.fyberapp.feature.offers.controller.OffersActivity;
 /**
  * An activity that is responsible for showing a form where the user can enter the needed data for viewving the offers.
  */
-// TODO add functional test for the activity
-// TODO improve the UI design (change colors, ...)
 public class FormActivity extends FyberBaseActivity {
 
 	private static final String LOG_TAG = FormActivity.class.getSimpleName();
