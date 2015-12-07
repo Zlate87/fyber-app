@@ -64,23 +64,7 @@ public class FormActivityTest {
 	}
 
 	@Test
-	public void theUserWantsToNavigateToTheOffersViewScreenByEnteringValidData() {
-		// step 1 - user enters data in the form
-		onView(withId(R.id.uid)).perform(typeText("spiderman"));
-		onView(withId(R.id.apiKey)).perform(typeText("1c915e3b5d42d05136185030892fbb846c278927"));
-		onView(withId(R.id.appid)).perform(typeText("2070"));
-		onView(withId(R.id.pub0)).perform(typeText("test"), closeSoftKeyboard());
-
-		// step 2 - user clicks on the "View Offers" button
-		onView(withId(R.id.viewOffers)).perform(click());
-
-		// step 3 - the app navigates to the offers screen and list of offers is displayed
-		onView(withId(R.id.noOffersTextView)).check(matches(not(isDisplayed())));
-		onView(withId(R.id.offersRecyclerView)).check(matches(isDisplayed()));
-	}
-
-	@Test
-	public void theUserWantsToNavigateToTheOffersViewScreenByNotEnteringData() {
+	public void theUserWantsToNavigateToTheOffersViewScreen() {
 		// step 1 - user clicks on the "View Offers" button
 		onView(withId(R.id.viewOffers)).perform(click());
 
