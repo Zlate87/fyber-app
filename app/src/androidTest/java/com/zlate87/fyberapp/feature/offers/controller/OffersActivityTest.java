@@ -74,6 +74,7 @@ public class OffersActivityTest {
 		Instrumentation instrumentation = InstrumentationRegistry.getInstrumentation();
 		App app = (App) instrumentation.getTargetContext().getApplicationContext();
 		MockOffersModule mockOffersModule = new MockOffersModule();
+		// to generate DaggerTestComponent just run the test
 		TestComponent component = DaggerTestComponent.builder().mockOffersModule(mockOffersModule).build();
 		app.setComponent(component);
 		component.inject(this);
