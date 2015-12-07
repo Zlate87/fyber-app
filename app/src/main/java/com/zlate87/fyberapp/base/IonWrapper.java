@@ -7,7 +7,6 @@ import android.widget.ImageView;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 import com.koushikdutta.ion.Response;
-import com.zlate87.fyberapp.R;
 
 /**
  * Class responsible for HTTP communication. This class is basically a wrapper for the ion library.

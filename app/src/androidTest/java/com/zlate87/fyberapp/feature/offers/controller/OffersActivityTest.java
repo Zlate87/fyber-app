@@ -33,7 +33,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.action.ViewActions.scrollTo;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
@@ -42,10 +41,7 @@ import static com.zlate87.fyberapp.feature.CustomMatchers.viewAtPositionInRecycl
 import static com.zlate87.fyberapp.feature.CustomMatchers.withDrawable;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doAnswer;
-import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.mock;
 
 /**
  * Test class for OffersActivity.

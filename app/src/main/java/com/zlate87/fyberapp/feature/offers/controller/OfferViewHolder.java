@@ -6,12 +6,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.koushikdutta.ion.Ion;
 import com.zlate87.fyberapp.R;
 import com.zlate87.fyberapp.feature.offers.model.Offer;
 import com.zlate87.fyberapp.feature.offers.service.OffersService;
-
-import javax.inject.Inject;
 
 /**
  * View holder class responsible for an offer.
