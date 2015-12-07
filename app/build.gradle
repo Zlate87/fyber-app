@@ -28,41 +28,40 @@ android {
 }
 dependencies {
     // google play services, for retrieving the GoogleAddId
-    compile 'com.google.android.gms:play-services-ads:8.3.0'
+    compile "com.google.android.gms:play-services-ads:$comGoogleAndroidGms_playServicesAds"
 
     // ion, used for HTTP communication
-    compile 'com.koushikdutta.ion:ion:2.1.6'
+    compile "com.koushikdutta.ion:ion:$comKoushikduttaIon_ion"
 
     // google guava, used for SHA1 calculation
-    compile 'com.google.guava:guava:18.0'
+    compile "com.google.guava:guava:$comGoogleGuava_guava"
 
     // google support libraries
-    compile 'com.android.support:appcompat-v7:23.1.1'
-    compile 'com.android.support:design:23.1.1'
+    compile "com.android.support:appcompat-v7:$comAndroidSupport"
+    compile "com.android.support:design:$comAndroidSupport"
 
     // dagger, used for dependencies injection
-    compile "com.google.dagger:dagger:2.0.2"
-    apt "com.google.dagger:dagger-compiler:2.0.2"
-    provided 'org.glassfish:javax.annotation:10.0-b28'
+    compile "com.google.dagger:dagger:$comGoogleDagger"
+    apt "com.google.dagger:dagger-compiler:$comGoogleDagger"
+    provided "org.glassfish:javax.annotation:$orgGlassfish_javaxAnnotation"
 
     // JUnit test dependencies
-    testCompile 'junit:junit:4.12'
-    testCompile "org.robolectric:robolectric:3.0"
-    testCompile 'org.mockito:mockito-core:1.10.19'
-    testCompile 'org.hamcrest:hamcrest-core:1.3'
-    testCompile 'org.springframework:spring-test:4.2.3.RELEASE'
+    testCompile "junit:junit:$junit_junit"
+    testCompile "org.robolectric:robolectric:$orgRobolectric_robolectric"
+    testCompile "org.mockito:mockito-core:$orgMockito_mockitoCore"
+    testCompile "org.hamcrest:hamcrest-core:$orgHamcrest_hamcrestCore"
+    testCompile "org.springframework:spring-test:$orgSpringframework_springTest"
 
     // Android instrument test dependencies
-    androidTestCompile 'com.android.support:support-annotations:23.1.1'
-    androidTestCompile 'com.android.support.test:runner:0.4.1'
-    androidTestCompile 'com.android.support.test:rules:0.4.1'
-    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.1'
-    androidTestCompile 'com.android.support.test.espresso:espresso-intents:2.2.1'
-    androidTestCompile 'org.mockito:mockito-core:1.10.19'
-    androidTestCompile "com.google.dexmaker:dexmaker:1.2"
-    androidTestCompile "com.google.dexmaker:dexmaker-mockito:1.2"
-    androidTestCompile 'org.mockito:mockito-core:1.10.19'
-    androidTestCompile 'com.koushikdutta.ion:ion:2.1.6'
-    androidTestApt "com.google.dagger:dagger-compiler:2.0.2"
+    androidTestCompile "com.android.support:support-annotations:$comAndroidSupport"
+    androidTestCompile "com.android.support.test:runner:$comAndroidSupportTest"
+    androidTestCompile "com.android.support.test:rules:$comAndroidSupportTest"
+    androidTestCompile "com.android.support.test.espresso:espresso-core:$comAndroidSupportTestEspresso"
+    androidTestCompile "com.android.support.test.espresso:espresso-intents:$comAndroidSupportTestEspresso"
+    androidTestCompile "org.mockito:mockito-core:$orgMockito_mockitoCore"
+    androidTestCompile "com.google.dexmaker:dexmaker:$comGoogleDexmaker"
+    androidTestCompile "com.google.dexmaker:dexmaker-mockito:$comGoogleDexmaker"
+    androidTestCompile "com.koushikdutta.ion:ion:$comKoushikduttaIon_ion"
+    androidTestApt "com.google.dagger:dagger-compiler:$comGoogleDagger"
 }
 
