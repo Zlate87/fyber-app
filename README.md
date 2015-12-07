@@ -15,3 +15,4 @@ The application comes with espresso tests (more information about espress [here]
 ```
 gradlew connectedAndroidTest
 ```
+NOTE: when running the espresso test, make sure that the animations are disabled on the device where the tests are running. More info [here](https://google.github.io/android-testing-support-library/docs/espresso/setup/index.html#running-tests).
