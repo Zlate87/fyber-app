@@ -15,6 +15,7 @@ public class OffersSignatureService {
 
 	private static final String LOG_TAG = OffersSignatureService.class.getSimpleName();
 
+	public static final String UTF_8 = "UTF-8";
 	private static final String SIGNATURE_HEADER_KEY = "X-Sponsorpay-Response-Signature";
 
 	/**
@@ -28,7 +29,7 @@ public class OffersSignatureService {
 		String signature = response.getHeaders().getHeaders().get(SIGNATURE_HEADER_KEY);
 		String responseBody = response.getResult();
 		String hashSource = responseBody + apiKey;
-		HashCode hashCode = Hashing.sha1().hashString(hashSource, Charset.defaultCharset());
+		HashCode hashCode = Hashing.sha1().hashString(hashSource, Charset.forName(UTF_8));
 		String hash = hashCode.toString();
 		boolean isValid = hash.equals(signature);
 		Log.d(LOG_TAG, String.format("isResponseSignatureValid for responseBody [%s], apiKey [%s] and  signature [%s] " +

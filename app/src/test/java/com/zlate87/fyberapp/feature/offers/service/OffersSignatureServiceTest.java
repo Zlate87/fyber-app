@@ -23,8 +23,6 @@ import static org.mockito.Mockito.when;
  */
 @RunWith(RobolectricGradleTestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 21)
-// TODO fix test
-@Ignore
 public class OffersSignatureServiceTest {
 
 	private TestHelper testHelper = new TestHelper();

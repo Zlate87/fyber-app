@@ -27,6 +27,12 @@ public class OfferViewHolder extends RecyclerView.ViewHolder {
 	private TextView teaser;
 	private TextView payout;
 
+	/**
+	 * Constructor.
+	 * @param itemView the item view
+	 * @param context the context
+	 * @param offersService the offer service
+	 */
 	public OfferViewHolder(View itemView, Context context, OffersService offersService) {
 		super(itemView);
 		this.context = context;

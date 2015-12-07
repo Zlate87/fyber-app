@@ -10,7 +10,7 @@ import dagger.Provides;
 import static org.mockito.Mockito.mock;
 
 /**
- * Created by Zlatko on 12/6/2015.
+ * OffersModule that provides mocked OffersService.
  */
 @Module
 public class MockOffersModule {

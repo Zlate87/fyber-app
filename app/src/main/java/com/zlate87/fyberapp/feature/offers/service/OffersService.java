@@ -66,7 +66,7 @@ public class OffersService {
 		// send the request to the backend, once the request is it will be precessed by the callback
 		String apiKey = offerParameters.getApiKey();
 		HttpStackOffersResponseCallback callback = new HttpStackOffersResponseCallback(this, futureCallback, apiKey);
-		ionWrapper.getStringObjectWithResponse(offersServiceUrl, callback, context);
+		ionWrapper.loadUrlWithStringResponse(offersServiceUrl, callback, context);
 	}
 
 	/**
@@ -103,7 +103,16 @@ public class OffersService {
 		futureCallback.onCompleted(null, offers);
 	}
 
-	public void loadImageFromUrlIntoImageView(ImageView imageView, String url, int placeholderRebid, int errorResId) {
-		ionWrapper.loadImageFromUrlIntoImageView(imageView, url, placeholderRebid, errorResId);
+	/**
+	 * Loads an image from and URL and adds it ot a image view.
+	 *
+	 * @param imageView        the image view
+	 * @param url              the URL
+	 * @param placeholderResId placeholder resource for while the image is loading
+	 * @param errorResId       resource to be used in case of an error
+	 */
+	public void loadImageFromUrlIntoImageView(ImageView imageView, String url, int placeholderResId, int errorResId) {
+		Log.d(LOG_TAG, String.format("loadImageFromUrlIntoImageView called with URL [%s]", url));
+		ionWrapper.loadImageFromUrlIntoImageView(imageView, url, placeholderResId, errorResId);
 	}
 }

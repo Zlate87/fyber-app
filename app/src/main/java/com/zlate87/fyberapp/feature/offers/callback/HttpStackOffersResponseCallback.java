@@ -16,6 +16,12 @@ public class HttpStackOffersResponseCallback implements FutureCallback<Response<
 	private FutureCallback<List<Offer>> futureCallback;
 	private OffersService offersService;
 
+	/**
+	 * Constructor.
+	 * @param offersService the offline service
+	 * @param futureCallback the feature callback
+	 * @param apiKey the api key
+	 */
 	public HttpStackOffersResponseCallback(OffersService offersService, FutureCallback<List<Offer>> futureCallback,
 																				 String apiKey) {
 		this.offersService = offersService;

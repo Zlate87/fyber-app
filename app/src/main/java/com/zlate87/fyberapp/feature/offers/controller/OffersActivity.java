@@ -43,6 +43,11 @@ public class OffersActivity extends FyberBaseActivity {
 	/** Key that is used when retrieving pud0 from the extras from the intent. */
 	public static final String PUB0_INTENT_EXTRA_KEY = "PUB0_INTENT_EXTRA_KEY";
 
+	// fyber parameters
+	private static final String FORMAT = "json";
+	private static final String LOCALE = "de";
+	public static final String IP = "109.235.143.113";
+
 	@Inject
 	protected OffersService offersService;
 
@@ -127,8 +132,8 @@ public class OffersActivity extends FyberBaseActivity {
 				offerParameters.setApiKey(getIntent().getExtras().getString(API_KEY_INTENT_EXTRA_KEY));
 				offerParameters.setPub0(getIntent().getExtras().getString(PUB0_INTENT_EXTRA_KEY));
 			}
-			offerParameters.setFormat("json");
-			offerParameters.setLocale("de");
+			offerParameters.setFormat(FORMAT);
+			offerParameters.setLocale(LOCALE);
 			offerParameters.setOsVersion(android.os.Build.VERSION.RELEASE);
 			offerParameters.setTimestamp(String.valueOf(System.currentTimeMillis() / 1000L));
 			try {
@@ -141,7 +146,7 @@ public class OffersActivity extends FyberBaseActivity {
 				offerParameters.setGoogleAddId("");
 				offerParameters.setGoogleAdIdLimitedTrackingEnabled("false");
 			}
-			offerParameters.setIp("109.235.143.113");
+			offerParameters.setIp(IP);
 			return offerParameters;
 		}
 

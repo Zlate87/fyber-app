@@ -23,7 +23,7 @@ import static org.mockito.Mockito.verify;
  */
 @RunWith(RobolectricGradleTestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 21)
-public class IonWrapperOffersResponseCallbackTest {
+public class HttpStackOffersResponseCallbackTest {
 
 	private HttpStackOffersResponseCallback httpStackOffersResponseCallback;
 	private OffersService offersService;

@@ -1,20 +1,19 @@
 package com.zlate87.fyberapp.feature.offers.service;
 
-import android.content.Context;
-
-import com.zlate87.fyberapp.feature.offers.service.OffersService;
-
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
 
 /**
- * Created by Zlatko on 12/6/2015.
+ * Dagger module for the OffersService.
  */
 @Module
 public class OffersModule {
 
+	/**
+	 * @return the provided OfferService
+	 */
 	@Provides
 	@Singleton
 	public OffersService provideOffersService() {

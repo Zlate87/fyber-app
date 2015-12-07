@@ -16,14 +16,28 @@ public class IonWrapper {
 
 	private static final String LOG_TAG = IonWrapper.class.getSimpleName();
 
-	// TODO add java doc
-	public void getStringObjectWithResponse(String url, FutureCallback<Response<String>> callback, Context context) {
-		Log.d(LOG_TAG, String.format("getStringObjectWithResponse called with URL [%s]", url));
+	/**
+	 * Loads URL and returns a string response.
+	 *
+	 * @param url      the URL to load
+	 * @param callback the callback to be called when the loading is done
+	 * @param context  the context
+	 */
+	public void loadUrlWithStringResponse(String url, FutureCallback<Response<String>> callback, Context context) {
+		Log.d(LOG_TAG, String.format("loadUrlWithStringResponse called with URL [%s]", url));
 		Ion.with(context).load(url).asString().withResponse().setCallback(callback);
 	}
 
-	// TODO add java doc
-	public void loadImageFromUrlIntoImageView(ImageView imageView, String url, int placeholderRebid, int errorResId) {
-		Ion.with(imageView).placeholder(placeholderRebid).error(errorResId).load(url);
+	/**
+	 * Loads an image from and URL and adds it ot a image view.
+	 *
+	 * @param imageView        the image view
+	 * @param url              the URL
+	 * @param placeholderResId placeholder resource for while the image is loading
+	 * @param errorResId       resource to be used in case of an error
+	 */
+	public void loadImageFromUrlIntoImageView(ImageView imageView, String url, int placeholderResId, int errorResId) {
+		Log.d(LOG_TAG, String.format("loadImageFromUrlIntoImageView called with URL [%s]", url));
+		Ion.with(imageView).placeholder(placeholderResId).error(errorResId).load(url);
 	}
 }

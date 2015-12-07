@@ -72,7 +72,7 @@ public class OffersServiceTest {
 
 		// then
 		verify(offersUrlService, times(1)).getOffersServiceUrl(parameters);
-		verify(ionWrapper, times(1)).getStringObjectWithResponse(eq(url), any(HttpStackOffersResponseCallback.class),
+		verify(ionWrapper, times(1)).loadUrlWithStringResponse(eq(url), any(HttpStackOffersResponseCallback.class),
 						eq(context));
 	}
 

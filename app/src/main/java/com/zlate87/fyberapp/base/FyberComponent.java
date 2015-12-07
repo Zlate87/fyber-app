@@ -5,7 +5,7 @@ import com.zlate87.fyberapp.feature.offers.service.OffersModule;
 import javax.inject.Singleton;
 
 /**
- * Created by Zlatko on 12/6/2015.
+ * Dagger Component interface that should be used in the app.
  */
 @Singleton
 @dagger.Component(modules = OffersModule.class)

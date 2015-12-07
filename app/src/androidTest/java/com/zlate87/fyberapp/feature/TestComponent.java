@@ -7,7 +7,7 @@ import javax.inject.Singleton;
 import dagger.Component;
 
 /**
- * Created by Zlatko on 12/6/2015.
+ * Dagger component for the tests containing mock modules.
  */
 @Singleton
 @Component(modules = MockOffersModule.class)
