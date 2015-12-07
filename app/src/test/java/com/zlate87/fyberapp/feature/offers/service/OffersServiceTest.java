@@ -5,7 +5,7 @@ import android.content.Context;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Response;
 import com.zlate87.fyberapp.BuildConfig;
-import com.zlate87.fyberapp.base.HttpStack;
+import com.zlate87.fyberapp.base.IonWrapper;
 import com.zlate87.fyberapp.feature.offers.callback.HttpStackOffersResponseCallback;
 import com.zlate87.fyberapp.feature.offers.exception.SignatureNotValidException;
 import com.zlate87.fyberapp.feature.offers.model.Offer;
@@ -37,22 +37,23 @@ import static org.mockito.Mockito.when;
 public class OffersServiceTest {
 
 	private OffersService offersService;
-	private HttpStack httpStack;
+	private IonWrapper ionWrapper;
 	private OffersUrlService offersUrlService;
 	private OffersJsonService offersJsonService;
 	private OffersSignatureService offersSignatureService;
+	private Context context;
 
 	@Before
 	public void setUp() {
-		Context context = mock(Context.class);
-		offersService = new OffersService(context);
+		offersService = new OffersService();
 
 		// mock the services
-		httpStack = mock(HttpStack.class);
+		ionWrapper = mock(IonWrapper.class);
 		offersUrlService = mock(OffersUrlService.class);
 		offersJsonService = mock(OffersJsonService.class);
 		offersSignatureService = mock(OffersSignatureService.class);
-		ReflectionTestUtils.setField(offersService, "httpStack", httpStack);
+		context = mock(Context.class);
+		ReflectionTestUtils.setField(offersService, "ionWrapper", ionWrapper);
 		ReflectionTestUtils.setField(offersService, "offersUrlService", offersUrlService);
 		ReflectionTestUtils.setField(offersService, "offersJsonService", offersJsonService);
 		ReflectionTestUtils.setField(offersService, "offersSignatureService", offersSignatureService);
@@ -67,11 +68,12 @@ public class OffersServiceTest {
 		when(offersUrlService.getOffersServiceUrl(parameters)).thenReturn(url);
 
 		// when
-		offersService.getOffersForParameters(parameters, callback);
+		offersService.getOffersForParameters(parameters, callback, context);
 
 		// then
 		verify(offersUrlService, times(1)).getOffersServiceUrl(parameters);
-		verify(httpStack, times(1)).getStringObjectWithResponse(eq(url), any(HttpStackOffersResponseCallback.class));
+		verify(ionWrapper, times(1)).getStringObjectWithResponse(eq(url), any(HttpStackOffersResponseCallback.class),
+						eq(context));
 	}
 
 	@Test

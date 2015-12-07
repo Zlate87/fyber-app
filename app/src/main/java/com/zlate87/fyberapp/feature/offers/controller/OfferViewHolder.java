@@ -9,11 +9,16 @@ import android.widget.TextView;
 import com.koushikdutta.ion.Ion;
 import com.zlate87.fyberapp.R;
 import com.zlate87.fyberapp.feature.offers.model.Offer;
+import com.zlate87.fyberapp.feature.offers.service.OffersService;
+
+import javax.inject.Inject;
 
 /**
  * View holder class responsible for an offer.
  */
 public class OfferViewHolder extends RecyclerView.ViewHolder {
+
+	private OffersService offersService;
 
 	private final Context context;
 
@@ -22,9 +27,10 @@ public class OfferViewHolder extends RecyclerView.ViewHolder {
 	private TextView teaser;
 	private TextView payout;
 
-	public OfferViewHolder(View itemView, Context context) {
+	public OfferViewHolder(View itemView, Context context, OffersService offersService) {
 		super(itemView);
 		this.context = context;
+		this.offersService = offersService;
 		setupView(itemView);
 	}
 
@@ -37,7 +43,9 @@ public class OfferViewHolder extends RecyclerView.ViewHolder {
 
 	public void reUseView(Offer offer) {
 		String thumbnailUrl = offer.getThumbnail();
-		Ion.with(thumbnail).placeholder(R.mipmap.ic_launcher).error(R.mipmap.ic_launcher).load(thumbnailUrl);
+		int placeholder = R.mipmap.loading_placeholder;
+		int loadingError = R.mipmap.loading_error;
+		offersService.loadImageFromUrlIntoImageView(thumbnail, thumbnailUrl, placeholder, loadingError);
 		title.setText(offer.getTitle().trim());
 		teaser.setText(offer.getTeaser().trim());
 		payout.setText(String.format(context.getString(R.string.payout), offer.getPayout()));

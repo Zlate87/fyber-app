@@ -2,10 +2,11 @@ package com.zlate87.fyberapp.feature.offers.service;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.ImageView;
 
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Response;
-import com.zlate87.fyberapp.base.HttpStack;
+import com.zlate87.fyberapp.base.IonWrapper;
 import com.zlate87.fyberapp.feature.offers.callback.HttpStackOffersResponseCallback;
 import com.zlate87.fyberapp.feature.offers.exception.SignatureNotValidException;
 import com.zlate87.fyberapp.feature.offers.model.Offer;
@@ -13,20 +14,23 @@ import com.zlate87.fyberapp.feature.offers.model.OfferParameters;
 
 import java.util.List;
 
+import javax.inject.Singleton;
+
 /**
  * Service class responsible for providing the needed offer services.
  */
+@Singleton
 public class OffersService {
 
 	private static final String LOG_TAG = OffersService.class.getSimpleName();
 
-	private HttpStack httpStack;
+	private IonWrapper ionWrapper;
 	private OffersUrlService offersUrlService;
 	private OffersJsonService offersJsonService;
 	private OffersSignatureService offersSignatureService;
 
-	public OffersService(Context context) {
-		httpStack = new HttpStack(context);
+	public OffersService() {
+		ionWrapper = new IonWrapper();
 		offersUrlService = new OffersUrlService();
 		offersJsonService = new OffersJsonService();
 		offersSignatureService = new OffersSignatureService();
@@ -38,7 +42,8 @@ public class OffersService {
 	 * @param offerParameters the parameters
 	 * @param futureCallback  a callback that will get the list of offers if properly received from the server
 	 */
-	public void getOffersForParameters(OfferParameters offerParameters, FutureCallback<List<Offer>> futureCallback) {
+	public void getOffersForParameters(OfferParameters offerParameters, FutureCallback<List<Offer>> futureCallback,
+																		 Context context) {
 		Log.d(LOG_TAG, String.format("getOffersForParameters called with parameters: apiKey=[%s], appid=[%s], " +
 										"format=[%s], googleAddId=[%s], googleAdIdLimitTrackingEnabled=[%s], ip=[%s], locale=[%s], " +
 										"osVersion=[%s], pub0=[%s], timeStamp=[%s], uid=[%s], ip=[%s]",
@@ -61,7 +66,7 @@ public class OffersService {
 		// send the request to the backend, once the request is it will be precessed by the callback
 		String apiKey = offerParameters.getApiKey();
 		HttpStackOffersResponseCallback callback = new HttpStackOffersResponseCallback(this, futureCallback, apiKey);
-		httpStack.getStringObjectWithResponse(offersServiceUrl, callback);
+		ionWrapper.getStringObjectWithResponse(offersServiceUrl, callback, context);
 	}
 
 	/**
@@ -96,5 +101,9 @@ public class OffersService {
 		Log.d(LOG_TAG, String.format("handleOffersResponse called with valid signature and body [%s]", body));
 		List<Offer> offers = offersJsonService.convertJsonToOffers(body);
 		futureCallback.onCompleted(null, offers);
+	}
+
+	public void loadImageFromUrlIntoImageView(ImageView imageView, String url, int placeholderRebid, int errorResId) {
+		ionWrapper.loadImageFromUrlIntoImageView(imageView, url, placeholderRebid, errorResId);
 	}
 }

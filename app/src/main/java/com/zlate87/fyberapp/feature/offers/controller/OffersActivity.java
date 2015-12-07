@@ -15,6 +15,7 @@ import com.google.android.gms.ads.identifier.AdvertisingIdClient;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.koushikdutta.async.future.FutureCallback;
+import com.zlate87.fyberapp.base.App;
 import com.zlate87.fyberapp.base.FyberBaseActivity;
 import com.zlate87.fyberapp.R;
 import com.zlate87.fyberapp.feature.offers.model.Offer;
@@ -23,6 +24,8 @@ import com.zlate87.fyberapp.feature.offers.service.OffersService;
 
 import java.io.IOException;
 import java.util.List;
+
+import javax.inject.Inject;
 
 /**
  * Activity that is responsible for showing offers for the parameters it receives via intent extras.
@@ -40,14 +43,15 @@ public class OffersActivity extends FyberBaseActivity {
 	/** Key that is used when retrieving pud0 from the extras from the intent. */
 	public static final String PUB0_INTENT_EXTRA_KEY = "PUB0_INTENT_EXTRA_KEY";
 
-	private OffersService offerService = new OffersService(this);
+	@Inject
+	protected OffersService offersService;
 
 	private RecyclerView offersRecyclerView;
 	private TextView noOffersTextView;
 
 	private ProgressDialog progress;
 
-	FutureCallback<List<Offer>> offersCallback = new FutureCallback<List<Offer>>() {
+	private FutureCallback<List<Offer>> offersCallback = new FutureCallback<List<Offer>>() {
 
 		@Override
 		public void onCompleted(Exception exception, List<Offer> offers) {
@@ -63,7 +67,7 @@ public class OffersActivity extends FyberBaseActivity {
 				return;
 			}
 
-			OffersAdapter offersAdapter = new OffersAdapter(offers, OffersActivity.this);
+			OffersAdapter offersAdapter = new OffersAdapter(offers, OffersActivity.this, offersService);
 			offersRecyclerView.setAdapter(offersAdapter);
 		}
 	};
@@ -71,6 +75,7 @@ public class OffersActivity extends FyberBaseActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		((App) getApplication()).getComponent().inject(this);
 		enableUpButton();
 
 		final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -142,7 +147,7 @@ public class OffersActivity extends FyberBaseActivity {
 
 		@Override
 		protected void onPostExecute(OfferParameters offerParameters) {
-			offerService.getOffersForParameters(offerParameters, offersCallback);
+			offersService.getOffersForParameters(offerParameters, offersCallback, OffersActivity.this);
 		}
 	}
 

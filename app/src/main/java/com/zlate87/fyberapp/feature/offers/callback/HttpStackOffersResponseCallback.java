@@ -8,7 +8,7 @@ import com.zlate87.fyberapp.feature.offers.service.OffersService;
 import java.util.List;
 
 /**
- * Callback class responsible for the offers result from the HttpStack
+ * Callback class responsible for the offers result from the IonWrapper
  */
 public class HttpStackOffersResponseCallback implements FutureCallback<Response<String>> {
 

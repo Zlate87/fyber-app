@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import com.zlate87.fyberapp.R;
 import com.zlate87.fyberapp.feature.offers.model.Offer;
+import com.zlate87.fyberapp.feature.offers.service.OffersService;
 
 import java.util.List;
 
@@ -15,6 +16,8 @@ import java.util.List;
  * An adapter responsible for handling the offers.
  */
 public class OffersAdapter extends RecyclerView.Adapter<OfferViewHolder> {
+
+	private OffersService offersService;
 
 	private final List<Offer> offers;
 	private final Context context;
@@ -24,16 +27,17 @@ public class OffersAdapter extends RecyclerView.Adapter<OfferViewHolder> {
 	 *
 	 * @param offers list of offers
 	 */
-	public OffersAdapter(List<Offer> offers, Context context) {
+	public OffersAdapter(List<Offer> offers, Context context, OffersService offersService) {
 		this.offers = offers;
 		this.context = context;
+		this.offersService = offersService;
 	}
 
 	@Override
 	public OfferViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 		LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
 		View offersListElement = layoutInflater.inflate(R.layout.offers_list_element, parent, false);
-		return new OfferViewHolder(offersListElement, context);
+		return new OfferViewHolder(offersListElement, context, offersService);
 	}
 
 	@Override
