@@ -47,6 +47,7 @@ public class OffersActivity extends FyberBaseActivity {
 	private static final String FORMAT = "json";
 	private static final String LOCALE = "de";
 	public static final String IP = "109.235.143.113";
+	public static final String OFFER_TYPES = "112";
 
 	@Inject
 	protected OffersService offersService;
@@ -147,6 +148,7 @@ public class OffersActivity extends FyberBaseActivity {
 				offerParameters.setGoogleAdIdLimitedTrackingEnabled("false");
 			}
 			offerParameters.setIp(IP);
+			offerParameters.setOfferTypes(OFFER_TYPES);
 			return offerParameters;
 		}
 

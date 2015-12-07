@@ -22,8 +22,9 @@ public class OffersUrlServiceTest {
 	public void shouldGetOffersServiceUrl() {
 		// given
 		String validUrl = "http://api.fyber.com/feed/v1/offers.json?appid=2070&format=json&google_ad_id=" +
-						"&google_ad_id_limited_tracking_enabled=false&ip=109.235.143.113&locale=de&os_version=5.1&" +
-						"pub0=test&timestamp=1449398607&uid=spiderman&hashkey=9993bf6109096f7c4142243f8cc6a1b2856345b0";
+						"&google_ad_id_limited_tracking_enabled=false&ip=109.235.143.113&locale=de&offer_types=112" +
+						"&os_version=5.1&pub0=test&timestamp=1449398607&uid=spiderman" +
+						"&hashkey=85ef6429ec2d661f8cd496b3af71357713700e71";
 		OfferParameters offerParameters = new OfferParameters();
 		offerParameters.setUid("spiderman");
 		offerParameters.setAppid("2070");
@@ -36,6 +37,7 @@ public class OffersUrlServiceTest {
 		offerParameters.setGoogleAddId("");
 		offerParameters.setGoogleAdIdLimitedTrackingEnabled("false");
 		offerParameters.setIp("109.235.143.113");
+		offerParameters.setOfferTypes("112");
 		OffersUrlService offersUrlService = new OffersUrlService();
 
 		// when

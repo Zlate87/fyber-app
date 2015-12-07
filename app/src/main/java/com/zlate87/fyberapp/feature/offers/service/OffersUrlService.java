@@ -38,6 +38,7 @@ public class OffersUrlService {
 		parameters.put("locale", offerParameters.getLocale());
 		parameters.put("ip", offerParameters.getIp());
 		parameters.put("pub0", offerParameters.getPub0());
+		parameters.put("offer_types", offerParameters.getOfferTypes());
 
 		StringBuilder stringBuilder = addParametersToStringBuilder(parameters);
 		String hashKey = generateHashKey(stringBuilder, offerParameters.getApiKey());

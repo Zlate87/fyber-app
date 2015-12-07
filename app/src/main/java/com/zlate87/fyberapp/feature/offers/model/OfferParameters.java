@@ -15,6 +15,7 @@ public class OfferParameters {
 	private String googleAdIdLimitedTrackingEnabled;
 	private String locale;
 	private String ip;
+	private String offerTypes;
 
 	public String getUid() {
 		return uid;
@@ -102,5 +103,13 @@ public class OfferParameters {
 
 	public void setIp(String ip) {
 		this.ip = ip;
+	}
+
+	public String getOfferTypes() {
+		return offerTypes;
+	}
+
+	public void setOfferTypes(String offerTypes) {
+		this.offerTypes = offerTypes;
 	}
 }
