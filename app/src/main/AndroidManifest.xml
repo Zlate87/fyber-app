@@ -3,8 +3,6 @@
 					xmlns:tools="http://schemas.android.com/tools"
 					package="com.zlate87.fyberapp">
 
-	<uses-permission android:name="android.permission.INTERNET" />
-
 	<application
 			android:allowBackup="false"
 			android:name="com.zlate87.fyberapp.base.App"
